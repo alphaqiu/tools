@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/alphaqiu/tools/process"
 	logger "github.com/ipfs/go-log/v2"
-	"tools/process"
 
 	"os"
 	"os/signal"

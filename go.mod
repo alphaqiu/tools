@@ -1,4 +1,4 @@
-module tools
+module github.com/alphaqiu/tools
 
 go 1.17
 
