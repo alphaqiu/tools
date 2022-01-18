@@ -1,4 +1,4 @@
-package process
+package tools
 
 import (
 	"fmt"
@@ -42,6 +42,22 @@ func PreparePIDFile(workdir, fileName string) (pidFilePath string, err error) {
 
 	pidFilePath = filepath.Join(homeDir, pidFile)
 	return pidFilePath, nil
+}
+
+func CheckProcessIfExistAndExit(pidPath string) (*SingleProcess, error) {
+	singleProcess := NewSingleProcess(pidPath)
+	if yes, err := singleProcess.IsRunning(); err != nil {
+		return nil, err
+	} else if yes {
+		fmt.Printf("进程已启动，本次运行退出！")
+		os.Exit(0)
+	}
+
+	if err := singleProcess.TouchPID(); err != nil {
+		return nil, err
+	}
+
+	return singleProcess, nil
 }
 
 func NewSingleProcess(pidPath string) *SingleProcess {

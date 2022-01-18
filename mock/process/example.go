@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/alphaqiu/tools/process"
+	"github.com/alphaqiu/tools"
 	logger "github.com/ipfs/go-log/v2"
 
 	"os"
@@ -14,12 +14,12 @@ var (
 
 func main() {
 	_ = logger.SetLogLevel("*", "debug")
-	pidFile, err := process.PreparePIDFile("/Users/alpha/Tmps", "app.pid")
+	pidFile, err := tools.PreparePIDFile("/Users/alpha/Tmps", "app.pid")
 	if err != nil {
 		log.Errorf("创建pid文件遇到了问题: %v", err)
 		return
 	}
-	singleProcess := process.NewSingleProcess(pidFile)
+	singleProcess := tools.NewSingleProcess(pidFile)
 	exist, err := singleProcess.IsRunning()
 	if err != nil {
 		log.Errorf("检查进程遇到了问题: %v", err)
